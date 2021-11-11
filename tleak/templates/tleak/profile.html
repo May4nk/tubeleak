@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class='sidnav sienav grey darken-4'>
+<div class='sidnav_margin'>
+    <ul>
+	<li>
+	    <a href="/">
+		<i class="material-icons extra-small sidnav_icon">public</i>
+		<div class='sidnav_head'>Tube</div>
+	    </a>
+	</li>
+	{% if usr.is_authenticated %}
+	<li>
+	<a href="{% url 'home' %}">
+		<i class="material-icons extra-small sidnav_icon">account_balance</i>
+		<div class='sidnav_head'>Home</div>
+	    </a>
+	</li>
+	{% endif %}
+	<li>
+	    <a href="{% url 'trends' %}">
+		<i class="material-icons extra-small sidnav_icon">whatshot</i>
+		<div class='sidnav_head'>Trends</div>
+	    </a>
+	</li>
+	{% if usr.is_authenticated %}
+	<li>
+		<a href="{% url 'logout' %}">
+		    <i class="material-icons extra-small sidnav_icon">priority_high</i>
+		    <div class='sidnav_head'>logout</div>
+		</a>
+	</li>
+	{% endif %}
+    </ul>
+</div>
+</div>
+<div class='row'>
+    <hr class='profhr'/>
+    <div class='tab'>
+	<span class='btn tabs' id='default'> home </span>
+	<span class='btn tabs'> videos </span>
+	{% if usr.username == use %}
+	<span class='btn tabs'> saved </span>
+	{% endif %}
+    </div>
+    <hr class='profhr2'/>
+    <div class='row'> 
+	<div class='col s6'>
+	    <div class='profilespace'> 
+		<div class='file-field input-field'>
+		    <img id='profimg' src='{% static uses.profile_pic %}'/>
+		    {% if usr.username == use %}
+		    <input type="file" accept='image/*' name='image' id='pix' required>
+		    <div class='addprof'>
+		        <i class='material-icons blue-text small'>add</i>
+		    </div>
+		    {% endif %}
+		</div>
+	    </div>
+	    <div class='profile_desc'>
+		    <div class='profile_title'>{{use}}</div>
+		    <div class='profile_subscribe'>{{count_sub}} subscribers</div>
+            </div>
+	</div>
+	{% if check_sub %}
+	<div class='col s6'>
+		<div name='{{use}}' class='subscribedbtn btn red'>Subscribed</div>
+	</div>
+ 	{% else %}
+
+	<div class='col s6'>
+		<div name='{{use}}' class='subscribebtn btn blue'>Subscribe</div>
+	</div>
+	{% endif %}
+    </div>
+</div>
+<div id="home" class="tabcontent">
+<div class='row profile_home'>
+	<div>
+		<span class='home_content'>Name</span>
+		<span class='home_inner'>{{uses.name}}</span>
+	</div>
+	<div>
+		<span class='home_content'>Username</span>
+		<span class='home_inner'>{{uses.username}}</span>
+	</div>
+	<div>
+		<span class='home_content'>Birthday</span>
+		<span class='home_inner'>382234</span>
+	</div>
+	<div>
+		<span class='home_content'>Email</span>
+		<span class='home_inner'>{{uses.email}}</span>
+	</div>
+</div>
+</div>
+<div id="videos" class="tabcontent">
+<div class='row prof_videos'>
+    {% for i in upload %}
+    <div class='col s3 m4'>
+	<div class='boxvid2'>
+	    <a href='{% url 'clip' i.id %}'>
+	    <video class='vido vido2' muted>
+		    <source src="{% static i.video %}" type='video/mp4'>
+	    </video>
+	    </a>
+	</div>
+	<div class='profspace'>
+		<img src='{% static 'img_avatar.pn' %}' class='profspace' onerror="this.src='{% static 't.png' %}'">
+	</div>
+	<div class='profadjust'>
+		<a href='{% url 'clip' i.title %}' class='black-text'>{{i.title|title}}</a>
+	</div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+<div id="saved" class="tabcontent">
+<div class='row'>
+</div>	
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+{% endblock %}

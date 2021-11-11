@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class='sidnav sienav grey darken-4'>
+<div class='sidnav_margin'>
+    <ul>
+	<li>
+	    <a href="/">
+		<i class="material-icons extra-small sidnav_icon">public</i>
+		<div class='sidnav_head'>Tube</div>
+	    </a>
+	</li>
+	{% if usr.is_authenticated %}
+	<li>
+	<a href="{% url 'home' %}">
+		<i class="material-icons extra-small sidnav_icon">account_balance</i>
+		<div class='sidnav_head'>Home</div>
+	    </a>
+	</li>
+	{% endif %}
+	<li>
+	    <a href="{% url 'trends' %}">
+		<i class="material-icons extra-small sidnav_icon">whatshot</i>
+		<div class='sidnav_head'>Trends</div>
+	    </a>
+	</li>
+	{% if usr.is_authenticated %}
+	<li>
+		<a href="{% url 'logout' %}">
+		    <i class="material-icons extra-small sidnav_icon">priority_high</i>
+		    <div class='sidnav_head'>logout</div>
+		</a>
+	</li>
+	{% endif %}
+    </ul>
+</div>
+</div>
+<div class='row'>
+    <video class='box10' controls >
+	    <source src='{% static vid.video %}' type='video/mp4'></source>
+    </video>
+	   
+</div>
+<div class='row'>
+    <div class='col s6'>
+        <p class='title_tag'>{{vid.tags}}</p>
+        <p class='title_vid'>{{vid.title|title}}</p>
+	<a href='{% url 'profile' vid.owner %}'><p class='vidowner'><span class='title_weight'>by</span> {{vid.owner}}</p></a>
+
+    </div>
+    <div class='col s6'>
+	 <span class='showviews'>{{vid.views}} &nbsp&nbsp views</span>
+	 <i class ='material-icons small right title_icn'>announcement</i>
+	 <i class ='material-icons small right title_icn2'>info_outline</i>
+	 <div class='date'><span class='title_weight'>on</span> {{vid.created}}</div>
+    </div>
+</div>
+<div class='box0'>
+	<div class='cmnt-header'>
+		<span class='cmnt_title'>Comments!</span>
+	</div>
+	<div class='cmnt-section'>
+		{% for i in cmnts %}
+		<div>
+			<span class='cmntname'>{{i.cmnt_by}}</span>
+			<span class='cmnt'>{{i.cmnt}}</span>
+
+		</div>
+		{% endfor %}
+	</div>
+	<div>
+	    {% if error %}{{error}}{% endif %}
+	</div>
+	<div class='cmnt-footer'>
+		<input id='cmnt_inp' name='cmnt' type='text' placeholder='Any comments!'>
+	</div>
+</div>
+<hr class='break'> 
+<div class='row'>
+    <div class='clipmargin'>
+    {% for i in all_clips %}
+    <div class='col s3 m3'>
+	<div class='boxvid1'>
+	    <a href='{% url 'clip' i.id %}'>
+	    <video class='vido vido1' muted>
+		    <source src="{% static i.video %}" type='video/mp4'>
+	    </video>
+	    </a>
+	</div>
+	<div class='pspace'>
+		<img src='{% static 'img_avatar.pn' %}' class='pspace' onerror="this.src='{% static 't.png' %}'">
+	</div>
+	<div class='adjust'>
+		<a href='{% url 'clip' i.id %}' class='black-text'>{{i.title|title}}</a>
+	</div>
+	<div class='channel'>
+		<a href='{% url 'profile' i.owner %}' class='black-text'>{{i.owner}}</a>
+	</div>
+    </div>
+    {% endfor %}
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+
+{% endblock %}
