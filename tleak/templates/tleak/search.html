@@ -1,68 +1,38 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<div class='sidnav sienav grey darken-4'>
-<div class='sidnav_margin'>
-    <ul>
-	<li>
-	    <a href="/">
-		<i class="material-icons extra-small sidnav_icon">public</i>
-		<div class='sidnav_head'>Tube</div>
-	    </a>
-	</li>
-	{% if usr.is_authenticated %}
-	<li>
-	    <a href="{% url 'home' %}">
-		<i class="material-icons extra-small sidnav_icon">account_balance</i>
-		<div class='sidnav_head'>Home</div>
-	    </a>
-	</li>
-	{% endif %}
-	<li>
-            <a href="{% url 'trends' %}">
-		<i class="material-icons extra-small sidnav_icon">whatshot</i>
-		<div class='sidnav_head'>Trends</div>
-	    </a>
-	</li>
-	{% if usr.is_authenticated %}
-	<li>
-		<a href="{% url 'logout' %}">
-		    <i class="material-icons extra-small sidnav_icon">priority_high</i>
-		    <div class='sidnav_head'>logout</div>
-		</a>
-	</li>
-	{% endif %}
-    </ul>
-</div>
-</div>
 <div class='row'>
     <p class='black-text search'>{{srch}}</p>
     <hr class='black-text searchhr'\>
     <div class='searchmargin'>
         <div class='col s4'>
-	{% for i in clips %}
-	<div class='boxvid'>
-	    <a href='{% url 'clip' i.id %}'>
-	    <video class='vido semar' muted>
-		    <source src="{% static '2.mp4' %}" type='video/mp4'>
-	    </video>
-	    </a>
-	</div>
-	{% endfor %}
+        {% if clips %}
+                {% for i in clips %}
+                <div class='se_box'>
+                    <a href='{% url 'clip' i.id %}'>
+                    <video class='semar' muted>
+                            <source src="{% static i.video %}" type='video/mp4'>
+                    </video>
+                    </a>
+                </div>
+                {% endfor %}
+        {% endif %}
         </div>
         <div class='col s8'>
-	    {% for i in clips %}
-	    <div class='sadjust'>
-		 <a href='{% url 'clip' i.id %}' class='black-text'>{{i.title|title}}</a>
-	    </div>
-	    <div class='m83'>
-	     <div class='sspace'>
-	     </div>
-	     <div class='schannel'>
-		 <a href='{% url 'profile' i.owner %}' class='black-text'>{{i.owner}}</a>
-	     </div>
-	    </div>
-	   {% endfor %}
+            {% if clips %}
+                    {% for i in clips %}
+                    <div class='sadjust'>
+                         <a href='{% url 'clip' i.id %}' class='black-text'>{{i.title|title}}</a>
+                    </div>
+                    <div class='m115'>
+                     <div class='sspace'>
+                     </div>
+                     <div class='schannel'>
+                         <a href='{% url 'profile' i.owner %}' class='black-text'>{{i.owner}}</a>
+                     </div>
+                    </div>
+                   {% endfor %}
+           {% endif %}
 	</div>
     </div>
 </div>

@@ -5,6 +5,25 @@ from .models import Owner,Upload,Comments,Subscribers
 from django.contrib.auth import login,logout,authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
+from django.contrib import messages
+
+def logn(req):
+    if req.user.is_authenticated:
+        return redirect('tube')
+    if req.method == 'POST':
+        usrname = req.POST['lusername']
+        psswd = req.POST['lpassword']
+        users = authenticate(req,username=usrname,password=psswd)
+        if users is not None:
+            login(req,users)
+#            logged_in = redirect('home')
+            #logged_in.set_cookie('usrname',usrname,max_age=60*60*20)
+            return redirect('home')
+        else:
+            messages.info(req,'Username or password does not match...')
+            return redirect('login')
+    return render(req,'tleak/login.html')
+
 
 def signup(req):
     if req.method == 'POST':
@@ -18,13 +37,20 @@ def signup(req):
         else:
             name = f_name
         if psswd == cpsswd:
+            if Owner.objects.filter(username=usrname):
+                messages.info(req,'Username already got account...')
+                return redirect(reverse('signup'))
             acc = Owner(name=name,username=usrname,password=cpsswd)
             if acc:
                 acc.save()
                 a = Owner.objects.get(username=usrname)
                 a.set_password(cpsswd)
                 a.save()
-                return redirect('tube')
+                return redirect('login')
+        else:
+            messages.info(req,"Passwords don't match...")
+            return redirect(reverse('signup'))
+    return render(req,'tleak/signup.html')
 
 
 def anon_logn(req):
@@ -49,24 +75,6 @@ def anon_logn(req):
                     print('go')
 
 
-def logn(req):
-    if req.user.is_authenticated:
-        return redirect('tube')
-    if req.method == 'POST':
-        usrname = req.POST['lusername']
-        psswd = req.POST['lpass']
-
-        if len(psswd) == 0 or len(usrname) == 0:
-            context = {
-                'error_msg':'p?',
-                    }
-            return render(req,'base.html',context)
-        users = authenticate(req,username=usrname,password=psswd)
-        if users is not None:
-            login(req,users)
-            logged_in = redirect('home')
-            logged_in.set_cookie('usrname',usrname,max_age=60*60*20)
-            return logged_in
             
 def home(req):
     usr = req.user
@@ -84,6 +92,7 @@ def home(req):
         }
     return render(req,'tleak/home.html',context)
 
+
 def tube(req):
     usr = req.user
     uplod = Upload.objects.all()
@@ -96,15 +105,18 @@ def tube(req):
 
 
 def clipon(req):
-    if req.method == 'POST':
-        clip = req.POST['pclip']
-        title = req.POST['ptitle']
-        tag = req.POST['ptags']
-        own = req.user.username
-        cupload = Upload(video=clip,title=title,owner=own,tags=tag)
-        if cupload:
-            cupload.save()
-            return redirect('tube')
+    if req.user.is_authenticated:
+        if req.method == 'POST':
+            clip = req.POST['pclip']
+            title = req.POST['ptitle']
+            tag = req.POST['ptags']
+            stags = tag.split(',')
+            tags = '#'.join(stags)
+            own = req.user.username
+            cupload = Upload(video=clip,title=title,owner=own,pic=req.user,tags=tags)
+            if cupload:
+                cupload.save()
+                return redirect('tube')
 
                 
 def search(req):
@@ -114,16 +126,16 @@ def search(req):
             }
     if req.method == 'POST':
         serch = req.POST.get('search')
-        if serch[0] == '#':
-            searched_clips = Upload.objects.filter(tags__startswith=serch[1:])
-        elif serch[0] == '.':
-            searched_clips = Upload.objects.filter(owner__username__startswith=serch[1:])
+        if serch[0] == '.':
+            searched_clips = Upload.objects.filter(owner__contains=serch[1:])
+        elif serch[0] == '#':
+            searched_clips = Upload.objects.filter(tags__contains=serch[1:])
         else:
-            searched_clips = Upload.objects.filter(title__startswith=serch)
-        context['srch'] = serch
+            searched_clips = Upload.objects.filter(title__contains=serch)
         context['clips'] = searched_clips
+        context['srch'] = serch
         return render(req,'tleak/search.html',context)
-    return render(req,'tleak/tube.html',context) 
+    return render(req,'tleak/search.html',context) 
 
 
 def clips(req,rid):
@@ -143,14 +155,17 @@ def clips(req,rid):
 
 
 def comment(req,cid):
-    if req.method == 'POST':
-        cmnt = req.POST['cmnt']
-        cmnt_by = req.user.username
-        cmnt_to = Upload.objects.get(id=cid)
-        comm = Comments(cmnt=cmnt,cmnt_by=cmnt_by,cmnt_to=cmnt_to)
-        if comm:
-            comm.save()
-            return redirect('clip',rid=cid)
+    if req.user.is_authenticated:
+        if req.method == 'POST':
+            cmnt = req.POST['cmnt']
+            cmnt_by = req.user.username
+            cmnt_to = Upload.objects.get(id=cid)
+            comm = Comments(cmnt=cmnt,cmnt_by=cmnt_by,cmnt_to=cmnt_to)
+            if comm:
+                comm.save()
+                return redirect('clip',rid=cid)
+    else:
+        return redirect('login')
 
 
 def trends(req):
@@ -178,6 +193,8 @@ def profile(req,profname):
         finally:
             count_sub = Subscribers.objects.filter(sub_to=profname).count
             check_sub = Subscribers.objects.filter(sub_to=profname,sub_by=usr)
+            sub = Subscribers.objects.filter(sub_by=usr)
+            
             context={
                 'usr':usr,
                 'use':use,
@@ -185,6 +202,7 @@ def profile(req,profname):
                 'upload': upload,
                 'check_sub': check_sub,
                 'count_sub': count_sub,
+                'sub': sub,
                 }
 
     return render(req,'tleak/profile.html',context)
@@ -205,7 +223,7 @@ def subscribers(req,profile_sub):
     if req.method == 'POST':
         sub_to = req.POST['subs']
         sub_by = req.user.username
-        subscribe = Subscribers(sub_to=sub_to,sub_by=sub_by)
+        subscribe = Subscribers(sub_to=sub_to,sub_by=sub_by,owner=Owner.objects.get(username=sub_to))
         if subscribe:
             subscribe.save()
             return redirect('profile',profname=profile_sub)

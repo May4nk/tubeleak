@@ -39,8 +39,9 @@ $('.icnright').click(function(e){
 	$('.mn').toggleClass('nm');
 	$('.vido').toggleClass('vido1');
 	$('.boxvid').toggleClass('boxvid1');
+        $('.vid_time').toggleClass('vid_time1');
+        $('.vid_date').toggleClass('vid_date1');
 })
-
 
 $(function(){
     $('.vido').on('mouseenter', function(){
@@ -50,63 +51,6 @@ $(function(){
 	$(this).attr('currentTime',0);
     });
 });
-
-
-$('.spin').click(function(e){
-	$('.flipboxinner').toggleClass('flip');	
-	if($('.flipboxinner').hasClass('flip')){
-		$('#lbtn').delay(230).hide(0);
-		$('#anbtn').delay(230).hide(0);
-	}else{
-		$('#lbtn').delay(230).show(0);
-		$('#anbtn').delay(230).show(0);
-	}
-})
-
-
-$('.lspace').on('click',function(){
-	$('.flipbox').css('display','block');
-})
-
-
-$('.cross').click(function(){
-	$(".flipbox").css('display','none');
-})
-
-
-$('#sbtn').click(function(){
-	let sf_name = $('input[name=sf_name]').val();	
-	let sl_name = $('input[name=sl_name]').val();
-	let susername = $('input[name=susername]').val();	
-	let spass = $('input[name=spass]').val();
-	let scpass = $('input[name=scpass]').val();	
-	$.ajax({
-		type: 'POST',
-		url: '/signup/',
-		headers :{
-			'X-CSRFToken':  getcsrfToken(),
-		},
-		data: {
-			sf_name : sf_name,
-			sl_name : sl_name,
-			susername : susername,
-			spass : spass,
-			scpass : scpass,
-		},
-		success: (data) => {
-			if(data){
-				$('input[name=sf_name]').val(''),	
-				$('input[name=sl_name]').val(''),
-				$('input[name=susername]').val(''),	
-				$('input[name=spass]').val(''),	
-				$('input[name=scpass]').val(''),	
-				location.reload();
-			}
-		},
-
-	})	
-})
-
 
 $('#anbtn').click(function(){
 	a = getcsrfToken()
@@ -129,66 +73,54 @@ $('#anbtn').click(function(){
 	})	
 })
 
-
-$('#lbtn').click(function(){
-	let lusername = $('input[name=lusername]').val();	
-	let lpass = $('input[name=lpassword]').val();
-	$.ajax({
-		type: 'POST',
-		url: '/login/',
-		headers :{
-			'X-CSRFToken':  getcsrfToken(),
-		},
-		data: {
-			lusername : lusername,
-			lpass : lpass,
-		},
-		success: (data) => {
-			if(data){
-				$('input[name=lusername]').val('');
-				$('input[name=lpassword]').val('');	
-				M.toast({html: 'logged In'});
-				setTimeout('location.reload()',300);
-			}
-		},
-
-	})	
-})
-
-$('#pbtn').click(function(){
+$('#pbtn').click(function(e){
+        e.preventDefault();
 	let pclips = $('input[name=pclip').val();	
 	let ptitle = $('input[name=ptitle]').val();
 	let ptags = $('input[name=ptags]').val();
-	let pclip = pclips.substring('12')
-	alert(pclip)
-	$.ajax({
-		type: 'POST',
-		url: '/clipon/',
-		headers :{
-			'X-CSRFToken':  getcsrfToken(),
-		},
-		data: {
-			pclip : pclip,
-			ptitle : ptitle,
-			ptags : ptags,
-		},
-		success: (data) => {
-			if(data){
-				$('input[name=pclip]').val('');
-				$('input[name=ptitle]').val('');	
-				$('input[name=ptags]').val('');	
-				M.toast({html: 'Posted'});
-				setTimeout('location.reload()',300);
-			}
-		},
+	let pclip = pclips.substring('12');
+        let fail = false;
+        $('form#add_form').find('input').each(function(){
+                if( !$(this).prop('required') ) {
+                        
+                }else{
+                        if($(this).val()=='') {
+                                fail=true;
+                        }
+                }
+        });
 
-	})	
+        if(!fail){
+                $.ajax({
+                        type: 'POST',
+                        url: '/clipon/',
+                        headers :{
+                                'X-CSRFToken':  getcsrfToken(),
+                        },
+                        data: {
+                                pclip : pclip,
+                                ptitle : ptitle,
+                                ptags : ptags,
+                        },
+                        success: (data) => {
+                                if(data){
+                                        $('input[name=pclip]').val('');
+                                        $('input[name=ptitle]').val('');	
+                                        $('input[name=ptags]').val('');	
+                                        M.toast({html: 'Posted'});
+                                       setTimeout('location.reload()',300);
+                                }
+                        },
+
+                })
+        }else{
+                M.toast({ html:'fill all fields.' });
+        }
 })
 
 $('.title_icn').click(function(){
         $('.box0').toggle().css('height','40%');
 });
-
 
 $('#uploa').on('change',function(){
 	upload_clip('#uplo',this);
@@ -287,16 +219,26 @@ $('.tabs').click(function(){
 })
 
 $('#default.tabs').addClass('active');
-$('#home.tabcontent').css('display','block');
+$('#videos.tabcontent').css('display','block');
 /* ------------------------- Materialize js -------------------------*/
 
 $(document).ready(function(){
+        $('img').each(function(){
+                if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0){
+                        $(this).attr('src','/static/t.png');
+                }
+        });
+
 	$('.modalx').modal();
-	$('.carousel').carousel();
+        $('.len').each(function(){
+                if($(this).children('.black-text').html().length >= 40){
+                        $(this).children('a').html($(this).children('a').html().substring(0,41).concat('....'));
+                }
+        })
 });
 
 document.addEventListener('DOMContentLoaded', function() {
     let elems = document.querySelectorAll('.sidenav');
     let instances = M.Sidenav.init(elems);
   });
-  
+

@@ -17,8 +17,10 @@ class Upload(models.Model):
     like = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     dislike = models.IntegerField(default=0)
+    pic = models.ForeignKey(Owner,on_delete=models.SET_NULL,null=True)
     tags = models.CharField(max_length=300,blank=True,null=True)
-    created = models.DateTimeField(auto_now=True)
+    created_time = models.TimeField(auto_now=True)
+    created_date = models.DateField(auto_now=True)
 
 class Comments(models.Model):
     cmnt = models.CharField(max_length=500)
@@ -29,4 +31,5 @@ class Comments(models.Model):
 class Subscribers(models.Model):
     sub_by = models.CharField(max_length=100)
     sub_to = models.CharField(max_length=100)
+    owner = models.ForeignKey(Owner,on_delete=models.SET_NULL,null=True)
     created = models.DateTimeField(auto_now=True)

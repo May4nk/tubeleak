@@ -2,48 +2,15 @@
 {% block content %}
 {% load static %}
 
-<div class='sidnav sienav grey darken-4'>
-<div class='sidnav_margin'>
-    <ul>
-	<li>
-	    <a href="/">
-		<i class="material-icons extra-small sidnav_icon">public</i>
-		<div class='sidnav_head'>Tube</div>
-	    </a>
-	</li>
-	{% if usr.is_authenticated %}
-	<li>
-	<a href="{% url 'home' %}">
-		<i class="material-icons extra-small sidnav_icon">account_balance</i>
-		<div class='sidnav_head'>Home</div>
-	    </a>
-	</li>
-	{% endif %}
-	<li>
-	    <a href="{% url 'trends' %}">
-		<i class="material-icons extra-small sidnav_icon">whatshot</i>
-		<div class='sidnav_head'>Trends</div>
-	    </a>
-	</li>
-	{% if usr.is_authenticated %}
-	<li>
-		<a href="{% url 'logout' %}">
-		    <i class="material-icons extra-small sidnav_icon">priority_high</i>
-		    <div class='sidnav_head'>logout</div>
-		</a>
-	</li>
-	{% endif %}
-    </ul>
-</div>
-</div>
 <div class='row'>
     <hr class='profhr'/>
     <div class='tab'>
-	<span class='btn tabs' id='default'> home </span>
-	<span class='btn tabs'> videos </span>
+	<span class='btn tabs' id='default'> videos </span>
 	{% if usr.username == use %}
 	<span class='btn tabs'> saved </span>
+        <span class='btn tabs'> channels </span> 
 	{% endif %}
+	<span class='btn tabs'> about </span>
     </div>
     <hr class='profhr2'/>
     <div class='row'> 
@@ -64,6 +31,7 @@
 		    <div class='profile_subscribe'>{{count_sub}} subscribers</div>
             </div>
 	</div>
+	{% if usr.username != use %}
 	{% if check_sub %}
 	<div class='col s6'>
 		<div name='{{use}}' class='subscribedbtn btn red'>Subscribed</div>
@@ -74,52 +42,79 @@
 		<div name='{{use}}' class='subscribebtn btn blue'>Subscribe</div>
 	</div>
 	{% endif %}
+	{% endif %}
     </div>
 </div>
-<div id="home" class="tabcontent">
-<div class='row profile_home'>
-	<div>
-		<span class='home_content'>Name</span>
-		<span class='home_inner'>{{uses.name}}</span>
-	</div>
-	<div>
-		<span class='home_content'>Username</span>
-		<span class='home_inner'>{{uses.username}}</span>
-	</div>
-	<div>
-		<span class='home_content'>Birthday</span>
-		<span class='home_inner'>382234</span>
-	</div>
-	<div>
-		<span class='home_content'>Email</span>
-		<span class='home_inner'>{{uses.email}}</span>
-	</div>
-</div>
-</div>
 <div id="videos" class="tabcontent">
-<div class='row prof_videos'>
     {% for i in upload %}
-    <div class='col s3 m4'>
-	<div class='boxvid2'>
+    {% if forloop.first %}<div class='row'>{% endif %}
+    <div class='col s2'>
+	<div class='profboxvid'>
 	    <a href='{% url 'clip' i.id %}'>
-	    <video class='vido vido2' muted>
+	    <video class='vido profvideo' muted>
 		    <source src="{% static i.video %}" type='video/mp4'>
 	    </video>
 	    </a>
 	</div>
-	<div class='profspace'>
-		<img src='{% static 'img_avatar.pn' %}' class='profspace' onerror="this.src='{% static 't.png' %}'">
-	</div>
-	<div class='profadjust'>
+	<div class='profadjust len'>
 		<a href='{% url 'clip' i.title %}' class='black-text'>{{i.title|title}}</a>
 	</div>
+        <div class='prof_date'>
+                {{i.views}} views | {{i.created_date}}
+        </div>
     </div>
+    {% if forloop.counter|divisibleby:6 %}</div><div class='row'>{% endif %}
+    {% if forloop.last %}</div>{% endif %}
     {% endfor %}
-</div>
 </div>
 <div id="saved" class="tabcontent">
 <div class='row'>
 </div>	
+</div>
+<div id="channels" class="tabcontent">
+  {% for i in sub %}
+  {% if forloop.first %}<div class='row'>{% endif %}
+    <div class='col s3'>
+        <div class='sub_channel'>
+            <img src='{% static i.owner.profile_pic %}' class='sub_channelpic'>
+        </div>
+        <div class='sub_title'>
+                <a  class='black-text' href='{% url 'profile' i.sub_to %}'> {{i.sub_to}}</a>
+        </div>
+    </div>
+    {% if forloop.counter|divisibleby:4 %}</div><div class='row'>{% endif %}
+    {% if forloop.last %}</div>{% endif %}
+    {% endfor %}
+</div>
+<div id="about" class="tabcontent">
+<div class='about_box'>
+     <div class='about_title'>
+             About
+     </div>
+     <hr class='about_hr'>
+     <div class='about_inbox'>
+Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+     </div>
+     <hr class='about_hr'>
+     <div class='about_title'>
+             Details
+     </div>
+     <hr class='about_hr'>
+     <div class='about_inbox'>
+           <div class='col s12'>
+           <div class='col s4'>
+               <div class='home_content'> Name: </div>
+               <div class='home_content'> Email: </div>
+           </div>
+           <div class='col s8'>
+               <div> {{use}} </div>
+               <div> {{uses.email}} </div>
+           </div>
+           </div>
+     </div>
+     <hr class='detail_hr'>
+
+</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 {% endblock %}

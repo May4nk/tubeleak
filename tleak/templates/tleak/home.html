@@ -1,67 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<div class='col s12'>
-    <div class='col s3'>
-        <div class='sidnav sienav grey darken-4'>
-	<div class='sidnav_margin'>
-	    <ul>
-	        <li>
-		    <a href="/">
-		        <i class="material-icons extra-small sidnav_icon">public</i>
-		        <div class='sidnav_head'>Tube</div>
-		    </a>
-	        </li>
-		{% if usr.is_authenticated %}
-	        <li>
-		<a href="{% url 'home' %}">
-		        <i class="material-icons extra-small sidnav_icon">account_balance</i>
-		        <div class='sidnav_head'>Home</div>
-		    </a>
-	        </li>
-		{% endif %}
-	        <li>
-		    <a href="{% url 'trends' %}">
-		        <i class="material-icons extra-small sidnav_icon">whatshot</i>
-		        <div class='sidnav_head'>Trends</div>
-		    </a>
-	        </li>
-		{% if usr.is_authenticated %}
-	        <li>
-		        <a href="{% url 'logout' %}">
-			    <i class="material-icons extra-small sidnav_icon">priority_high</i>
-			    <div class='sidnav_head'>logout</div>
-		        </a>
-	        </li>
-		{% endif %}
-	    </ul>
-        </div>
-        </div>
-    </div>
-    <div class='col s9'>
-	<div class='mn nm'>
-	    {% for i in home %}
-	    <div class='col s3'>
-		<div class='boxvid boxvid1'>
-		    <a href='{% url 'clip' i.id %}'>
-		    <video class='vido vido1' muted>
-			    <source src="{% static i.video %}" type='video/mp4'>
-		    </video>
-		    </a>
-		</div>
-		<div class='pspace'>
-			<img src='{% static 'img_avatar.pn' %}' class='pspace' onerror="this.src='{% static 't.png' %}'">
-		</div>
-		<div class='adjust'>
-			<a href='{% url 'clip' i.id %}' class='black-text'>{{i.title|title}}</a>
-		</div>
-		<div class='channel'>
-			<a href='{% url 'profile' i.owner %}' class='black-text'>{{i.owner}}</a>
-		</div>
-	    </div>
-	    {% endfor %}
-	</div>
-    </div>
+<div class='mn nm'>
+    {% for i in home %}
+            {% if forloop.first %}<div class="row">{% endif %}
+                    <div class='col s3'>
+                        <div class='boxvid boxvid1'>
+                            <a href='{% url 'clip' i.id %}'>
+                            <video class='vido vido1' muted>
+                                    <source src="{% static i.video %}" type='video/mp4'>
+                            </video>
+                            </a>
+                        </div>
+                        <div class='pspace'>
+                                <img src='{% static i.pic.profile_pic %}' class='pspace'>
+                        </div>
+                        <div class='adjust len'>
+                                <a href='{% url 'clip' i.id %}' title='{{i.title|title}}' class='black-text'>{{i.title|title}}</a>
+                        </div>
+                        <div class='channel'>
+                                <a href='{% url 'profile' i.owner %}' class='black-text'>{{i.owner}}</a>
+                        </div>
+                        <div class='vid_date vid_date1'>
+                                {{i.created_date}} | {{i.created_time}}
+                        </div>
+                    </div>
+            {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+            {% if forloop.last %}</div>{% endif %}
+    {% endfor %}
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 {% endblock %}

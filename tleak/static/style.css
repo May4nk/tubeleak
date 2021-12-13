@@ -18,6 +18,10 @@ nav ul a:hover {
     background-color: transparent;
 }
 
+.side_logout{
+        margin-top: 361px;
+}
+
 #toast-container {
       top: auto !important;
       right: auto !important;
@@ -50,51 +54,6 @@ nav ul a:hover {
 	margin-top: -59px;
 	border-radius: 9px;
 	display: inline-block;
-}
-
-.flipbox{
-  	z-index: 2; 
-	background-color: transparent;
-	height: 477px;
-  	width: 375px;
-  	margin-left: 537px;
-	perspective: 1000px;
-	position: fixed;
-	top: 77px;
-	display: none;
-}
-
-.flipboxinner {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	text-align: center;
-	transition: transform 0.8s;
-	transform-style: preserve-3d;
-}
-
-.flip{
-	transform: rotateY(180deg);
-}
-
-
-.flipboxfront, .flipboxback {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	backface-visibility: hidden;
-	border-radius: 3px;
-}
-
-.flipboxfront {
-        color: white;
-  	background-color: black;
-}
-
-.flipboxback {
-	background-color: black;
-	color: white;
-	transform: rotateY(180deg);
 }
 
 #search {
@@ -134,7 +93,7 @@ nav ul a:hover {
 }
 
 .login_name{
-	margin: 7px 0px 0px 3px;
+	margin: 7px 0px 0px -11px;
 }
 
 .modalx{
@@ -161,7 +120,16 @@ nav ul a:hover {
 
 .add_user{
 	margin-top: 19px;
-	margin-left: 95px;
+	margin-left: 11px;
+	color: white;
+	font-weight: 500;
+	font-size: 17px;
+	margin-bottom: 1px;
+}
+
+.add_user1{
+	margin-top: 19px;
+	margin-left: 172px;
 	color: white;
 	font-weight: 500;
 	font-size: 17px;
@@ -173,18 +141,6 @@ nav ul a:hover {
 	margin-top: 9px;	
 }
 
-#in4{
-	border: 1px solid rgb(8,75,108) !important;
-	height: 37px !important;
-	width: 373px !important;
-	border-radius: 9px;
-	padding-left: 13px;
-	padding-right: 13px;
-	margin-bottom: 0px;
-	margin-left: 83px;
-	color: white;
-
-}
 
 #in5{
 	border: 1px solid rgb(8,75,108) !important;
@@ -194,10 +150,22 @@ nav ul a:hover {
 	padding-left: 13px;
 	padding-right: 13px;
 	margin-bottom: 0px;
-	margin-left: 81px;
+	margin-left: 166px;
 	color: white;
 }
 
+#in6{
+	border: 1px solid rgb(8,75,108) !important;
+	height: 37px !important;
+	width: 553px !important;
+	border-radius: 9px;
+	padding-left: 13px;
+	padding-right: 13px;
+	margin-bottom: 0px;
+	margin-left: 5px;
+	color: white;
+
+}
 .nav_title {
 	margin-left: 83px;
 }
@@ -216,89 +184,180 @@ nav ul a:hover {
 	margin-top: 7px;
 }
 
+
+/*------------------------!base---------------------------*/
+
+/*-------- ----------------login ----------------------*/
+
+.lbox{
+        border: 1px solid #514545;
+        border-radius: 3px;
+	background-color: black;
+	height: 507px;
+  	width: 447px;
+  	margin-left: 471px;
+	position: fixed;
+	top: 55px;
+}
+
+.lerror{
+        color: red;
+        margin: -9px 0px -9px 97px;
+}
+
 .log_title{
-	font-weight:500;
-	font-size:39px;
-	margin-top:9px;
-	margin-bottom: -32px;
+	font-weight: 500;
+	font-size: 33px;
+        margin: 27px 0px -32px 163px;
 }
 
 .log_title1{
 	font-weight:99;
 	font-size:15px;
-	margin-top:27px;
+	margin:27px 0px 17px 99px;
 }
 
 .log_user{
-	margin-left: -11px;
-	margin-bottom: 3px;
+        color: white;
+	margin: 0px 0px 3px 27px;
+}
+
+
+#in1{
+	border: 1px solid #514545 !important;
+        color: white;
+	height: 37px !important;
+	width: 319px !important;
+	border-radius: 13px;
+	padding: 0px 13px 0px 13px;
+	margin: 0px 0px -13px 27px;
+}
+
+#in1:focus{
+        border: 1px solid white !important;
 }
 
 .topper {
-	padding-top:19px !important;
+	margin: -19px 0px 0px 257px;
+
 }
 
-#in1{
-	border: 1px solid #149bd0 !important;
-	height: 37px !important;
-	width: 177px !important;
-	border-radius: 13px;
-	padding: 0px 13px 0px 13px;
-	margin: 0px 0px -13px 81px;
+.lbtn{
+        margin:-27px 0px 0px 307px;
+}
+
+.sign_link {
+        font-weight: 600;
+        margin: 41px 0px 0px 47px;
 }
 
 .annonbtn{
-	margin-top: 11px;
+	margin: 33px 0px 0px 37px;
 }
 
-.bg {
-	background-color: rgb(148,176,227) !important;
+#anbtn{
+        width: 341px !important;
+}
+/*------------------login(END)-------------------------*/
+
+/*------------------Signup-------------------------*/
+
+
+.sbox{
+        border: 1px solid rgb(89,94,104);
+        background-color: rgb(42,43,45);
+        border-radius: 3px;
+        height: 565px;
+        width: 701px;
+        margin: 31px 0px 0px 335px;        
+}
+
+.serror{
+        color: red;
+        margin: 5px 0px -7px 0px;
 }
 
 .sg_title{
-	font-weight: 500;
-	font-size: 39px;
+	font-weight: 499;
+	font-size: 23px;
+        margin: 49px 0px 0px -61px;
 }
 
 .sg_title1{
-	font-weight: 99;
+	font-weight: 399;
 	font-size: 15px;
-	margin-top: 3px;
+	margin: 3px 0px 0px -61px;
 }
 
 .rot{
-	margin-top: -9px;
-	margin-bottom: 1px;
+	margin: 5px 0px 3px 0px;
 }
 
 #in2{
 	border: 2px solid black !important;
-	height: 37px !important;
-	width: 137px !important;
+	height: 33px !important;
+	width: 161px !important;
 	border-radius: 9px;
-	padding-left: 13px;
-	padding-right: 13px;
-	margin-bottom: 0px;
+        color: black;
 	box-shadow: 1px 3px;
+	padding: 0px 13px 0px 13px;
+        margin-left: -63px;
 }
-
 
 #in3{
 	border: 2px solid black !important;
-	height: 37px !important;
-	width: 325px !important;
+	height: 33px !important;
+	width: 161px !important;
 	border-radius: 9px;
-	padding-left: 13px;
-	padding-right: 13px;
+        color: black;
 	box-shadow: 1px 3px;
+	padding: 0px 13px 0px 13px;
+        margin-left: -37px;
+}
+
+
+#in4{
+	border: 2px solid black !important;
+	height: 37px !important;
+	width: 363px !important;
+	border-radius: 9px;
+        color: black;
+	box-shadow: 1px 3px;
+	padding: 0px 13px 0px 13px;
+        margin-left: -63px
 }
 
 .sg_user{
-	margin-bottom: 0px;
+	margin:0px 0px 0px -61px;
 }
 
+.sg_user1{
+        margin: 0px 0px 0px -31px;
+}
 
-/*------------------------!base---------------------------*/
+.log_link{
+        font-weight: 600;
+        margin: 53px 0px 0px -47px;
+}
+
+.sbtn{
+        margin: -29px 0px 0px 241px;
+}
+
+.sign_img{
+        height: 239px;
+        width : 273px;
+}
+
+.img{
+        margin-top: 129px;
+}
+
+.img_txt{
+        font-size: 19px;
+        margin-left: 10px;
+}
+/*------------------signup(END)-------------------------*/
 
 /*------------------------tube---------------------------*/
 
@@ -352,13 +411,13 @@ nav ul a:hover {
 }
 
 .mn{
-	margin-left:-117px !important;
-	margin-top: 41px;
+	margin-left: 235px !important;
+	margin-top: 61px;
 }
 
 .nm{
-	margin-left: -239px !important;
-	margin-top: 41px;
+	margin-left: 91px !important;
+	margin-top: 61px;
 }
 
 .vido{
@@ -391,12 +450,26 @@ nav ul a:hover {
 	margin-left: 53px;
 	margin-top: -39px;
 	font-weight: 400;
+        word-wrap: break-word;
+        width: 163px;
 }
 
 .channel{
 	margin-left: 53px;
 	margin-top: 0px;
 	font-weight: 200;
+        word-wrap: break-word;
+        width: 130px;
+}
+
+.vid_date{
+        font-size: 9px;
+        margin: 0px 0px 0px 53px;
+}
+
+.vid_date1{
+        font-size: 10px;
+        margin: 0px 0px 0px 53px;
 }
 
 .sienav{
@@ -420,23 +493,31 @@ nav ul a:hover {
 /*------------------------search---------------------------*/
 
 .search{
-	margin-top: 63px;
-	margin-left: 141px;
 	font-size: 33px;
+	margin: 63px 0px 0px 141px;
 }
 
 .searchmargin{
-	margin-left: 107px;
-	margin-top: -9px;
+	margin: -9px 0px 0px 107px;
 }
 
 .searchhr{
 	width: 83%;
-	margin-top: -21px;
+	margin-top: -3px;
+}
+
+.se_box{
+	border: 1px solid black;
+	width: 220px;
+	height: 170px;	
+	background: black;
+	margin-top: 13px;
 }
 
 .semar{
 	margin-bottom: -45px;
+        width: 218px;
+        height: 167px;
 }
 
 .sspace{
@@ -445,25 +526,24 @@ nav ul a:hover {
 	background-color: grey;
 	border-radius: 50%;
 	display: block;
-	margin-top: 13px;
-	margin-left: -158px;
+	margin: 13px 0px 0px -158px;
 }
 
 .sadjust{
-	margin-left: -168px;
-	margin-top: 33px;
 	font-weight: 400;
 	font-size: 19px;
+	margin: 33px 0px 0px -168px;
+        width: 89%;
+        word-wrap: break-word;
 }
 
 .schannel{
-	margin-left: -117px;
-	margin-top: -29px;
 	font-weight: 300;
+	margin: -29px 0px 0px -117px;
 }
 	
-.m83{
-	margin-bottom: 83px;
+.m115{
+	margin-bottom: 115px;
 }
 
 /*------------------------!search---------------------------*/
@@ -486,6 +566,8 @@ nav ul a:hover {
 	color: rgb(8,75,108);
 	font-weight: 600;
 	font-size: 23px;
+        width: 141%;
+        word-wrap: break-word;
 }
 
 
@@ -535,16 +617,28 @@ nav ul a:hover {
 	border-radius: 7px;
 }
 
-.title_weight{
-	font-weight: 400;
+.cltitle{
+        margin-top: -29px;
+        display: block;
+        margin-left: 157px;
+        font-weight: 587;
+	color: rgb(8,75,108);
 }
 
-.vidowner{
-	margin-left: 110px;
-	margin-top: -21px;
-	font-size: 17px;
-	color: rgb(8,75,108);
-	font-weight: 600;
+.cpace {
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+}
+
+.clspace{
+        display: block;
+        border: 1px solid black;
+        border-radius: 50%;
+        height: 37px;
+        width: 37px;
+        margin-top: -21px;
+        margin-left: 111px;
 }
 
 .showviews{
@@ -572,6 +666,11 @@ nav ul a:hover {
 	color: rgb(8,75,108);
 }
 
+.cmnthr {
+        width: 98%;
+        color: black;
+}
+
 .cmnt-section{
 	overflow-y: auto;
 	overflow-x: hidden;	
@@ -589,24 +688,30 @@ nav ul a:hover {
 }
 
 .cmnt{
-	font-weight: 300;
-	font-size: 15px;
+        font-weight: 300;
+        font-size: 15px;
+        margin-top: -23px;
+        margin-left: 93px;
+        width: 91%;
+        word-wrap: break-word;
+        margin-bottom: 7px;
 }
 
 .cmnt-footer{
-	margin-top: 11px;
+	margin-top: -3px;
 }
 
 #cmnt_inp{
 	border: 1px solid black;
 	padding-left: 9px;
 	padding-right: 9px;
-	width: 1104px;
+	width: 1101px;
 	border-radius: 0px 0px 7px 7px;
 	margin-left: -1px;
 	height: 37px;
 	background-color: black;
 	color: white;
+        position: static;
 }
 
 /*--------------------------!clip-------------------------*/
@@ -614,20 +719,19 @@ nav ul a:hover {
 /* ------------------------trending--------------------------*/
 
 .trendingmargin{
-	margin-left: 107px;
-	margin-top: 63px;
+	margin: 63px 0px 0px 107px;
 }
 
 .vido2{
-	width: 303px;
-	height: 227px;
+	width: 247px;
+	height: 177px;
 	margin-bottom: -45px;
 }
 
 .boxvid2{
 	border: 1px solid black;
-	width: 305px;
-	height: 233px;	
+	width: 249px;
+	height: 179px;	
 	background: black;
 	margin-top: 13px;
 }
@@ -638,26 +742,46 @@ nav ul a:hover {
 	background-color: grey;
 	border-radius: 50%;
 	display: block;
-	margin-top: 13px;
-	margin-left: -93px;
+	margin: 13px 0px 0px -149px;
+}
+
+.tspacepic{
+	height: 39px;
+	width: 39px;
+	border-radius: 50%;
+	display: block;
+	margin: 13px 0px 0px 0px;
 }
 
 .tadjust{
-	margin-left: -89px;
-	margin-top: 37px;
 	font-weight: 400;
 	font-size: 23px;
+	margin: 13px 0px -9px -149px;
+        word-wrap: break-word;
+        width: 673px;
 }
 
 .tchannel{
-	margin-left: -41px;
-	margin-top: -29px;
 	font-weight: 300;
+	margin: -29px 0px 0px -99px;
+        word-wrap: break-word;
+        width: 247px;
 }
 
-.m167{
-	margin-bottom: 167px;
+.tviews {
+        margin: 13px 0px 0px -147px;
 }
+
+.tdate {
+    font-weight: 300;
+    font-size: 13px;
+    margin: 0px 0px 0px -147px;
+}
+
+.m123{
+	margin-bottom: 66px;
+}
+
 /* ---------------------------!trending--------------------------------*/
 
 /* ---------------------------profile--------------------------------*/
@@ -744,8 +868,9 @@ nav ul a:hover {
 
 .tabcontent{
 	display:none;
-	padding: 6px 12px;
-        border-top: none;
+        margin-left: 107px;
+        margin-top: -17px;
+        margin-right: 60px;
 }
 
 .addprof{
@@ -759,42 +884,101 @@ nav ul a:hover {
 	border-radius: 50%;	
 }
 
-.prof_videos{
-	margin-left: 135px;
-	margin-top: -53px;
+.profboxvid{
+	border: 1px solid black;
+	width: 179px;
+	height: 161px;	
+	background: black;
+	margin-top: 13px;
+}
+
+.profvideo{
+        width: 177px;
+        height: 168px;
 }
 
 .profadjust{
-	margin-left: 53px;
-	margin-top: -37px;
-	font-weight: 400;
-	font-size: 25px;
+	margin-left: 4px;
+	margin-top: 1px;
+	font-weight: 600;
+	font-size: 15px;
+        word-wrap: break-word;
+        width: 163px;
 }
 
-.profspace{
-	height: 41px;
-	width: 41px;
-	background-color: black;
-	border-radius: 50%;
-	display: block;
-	margin-top: 17px;
-	margin-left: 0px;
+.prof_date{
+        font-size: 11px;
+        margin: 0px 0px 0px 3px;
 }
+
+.sub_channel {
+    border: 1px solid black;
+    border-radius: 50%;
+    height: 157px;
+    width: 157px;
+    margin: 19px 0px 0px 53px;
+    background: black;
+}
+
+.sub_channelpic {
+    border-radius: 50%;
+    height: 155px;
+    width: 155px;
+}
+
+.sub_title{
+        font-size: 17px;
+        font-weight: 600;
+        margin: 11px 0px 0px 87px;
+        color: black;
+}
+
 
 .profile_home{
 	margin-left: 13%;
 	margin-top: 61px;
 }
 
+.about_box{
+        height: 90%;
+        width: 100%;
+        background: black;
+        font-size: 17px;
+        margin-bottom: -20px;
+}
+
+.about_title{
+        padding-top: 25px;
+        padding-left: 25px;
+        font-size: 25px;
+        color: white;
+        font-weight: 600;
+}
+
+.about_hr{
+        color: #262424;
+        width: 73%;
+        margin-left: 23px;
+}
+
+.about_inbox{
+        height: auto;
+        width: 70%;
+        margin-left: 27px;
+        word-wrap: break-word;
+        color: white;
+        font-weight: 300;
+}
+
 .home_content{
-	font-size: 20px;
-	font-weight: 600;
-	margin-top: 3px;
+        font-size: 17px;
+font-weight: 600;
+margin-left: 18px;
 }
-
-.home_inner{
-	margin-left: 73px;
-	font-weight: 400;
+.detail_hr{
+        margin-left: 2%;
+        margin-top: 67px;
+        width: 73%;
+        color: #262424;
 }
-
 /*---------------------------!profile-------------------------------------*/

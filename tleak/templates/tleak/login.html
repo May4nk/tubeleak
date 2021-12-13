@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% load static %}
+    <link rel='stylesheet' href='{% static 'style.css' %}'>
+    <title>Tubeleak</title>
+</head>
+<body style='background:black;'>
+<div class="lbox">
+      <div class='white-text log_title'>
+	      Log IN
+      </div>
+      <div class='white-text log_title1'>
+	      Please enter your username and password
+      </div>
+      {% for message in messages %} 
+          <p class='lerror'>{{ message }}</p>
+      {% endfor %}
+      <form  method='post'>
+      {% csrf_token%}
+          <div class="row">
+	      <div class="input-field col s9">
+	          <p for="lusername" class='log_user'>Username</p>
+	          <input name='lusername' type="text" class="validate" id='in1' required>
+	      </div>
+	  </div>
+	  <div class="row">
+	      <div class="input-field col s9">
+	          <p for="lpassword" class='log_user'>Password</p>
+	          <input name='lpassword' type="password" class="validate" id='in1' required>
+	      </div>
+	  </div>
+          <div class='topper'>
+             <a href='/'>
+                 Forgot Password ?
+             </a>
+          </div>
+          <div class='row'>
+                  <div class='sign_link'>
+                          <a href='{% url 'signup' %}'>Create Account</a>
+                  </div>
+	          <div class='lbtn'>
+	                <button class="btn waves-effect waves-light blue black-text" type="submit" name="action">
+		      Login
+	                </button>
+	          </div>
+          </div>
+      </form>
+      <div class='annonbtn'>
+      	<button class='btn waves-effect waves-light grey black-text' id='anbtn'>
+		Login as Annonymous
+	    </button>
+      </div>
+</div> 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+<script src="{% static 'index.js' %}"></script>
+</body>
+</html>

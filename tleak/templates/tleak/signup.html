@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% load static %}
+    <link rel='stylesheet' href='{% static 'style.css' %}'>
+    <title>Tubeleak</title>
+</head>
+<body style='background:black;'>
+<div class='sbox'>
+  <div class='row col s12'>
+      <div class='col s6'>
+          <div class='img'>
+                  <img src='{% static 'tube.png'%}'  class='sign_img'>
+          </div>
+          <div class='img_txt'>
+                  You can Hide here...
+          </div>
+      </div>
+      <div class='col s6'>
+          <div class='sg_title'>Sign Up for Tubeleak Account.</div>
+          <div class='sg_title1'>Join a space of freedom</div>
+          {% for message in messages %}
+           <p class='serror'>{{message}}</p>
+          {% endfor %}
+          <form method='post'>
+          {% csrf_token %}
+             <div class="row rot">
+                 <div class="input-field col s6">
+                     <p for="sf_name" class='sg_user'>First name</p>
+                     <input name="sf_name" type="text" id='in2' required>
+                 </div>
+                 <div class="input-field col s6">
+                     <p for="sl_name" class='sg_user1'>Last name</p>
+                     <input name="sl_name" type="text" id='in3'>
+                 </div>
+             </div>
+             <div class='row rot'>
+                 <div class="input-field col s12">
+                      <p for="susername" class='sg_user'>Username</p>
+                      <input name="susername" type="text" pattern='[a-zA-Z0-9_]+' title='Username accepts A-Z, a-z, 0-9 and an underscore.' id='in4' required>
+                 </div>
+             </div>
+             <div class="row rot">
+                 <div class="input-field col s6">
+                      <p for="spass" class='sg_user'>Password</p>
+                      <input name="spass" type="password" pattern='[A-Za-z0-9_!]+{6,}' title='Password accepts A-Z, a-z, 0-9, underscore, exclamation mark and should be of more than 6 characters.' id='in2' required>
+                 </div>
+                 <div class="input-field col s6">
+                      <p for="scpass" class='sg_user1'>Confirm psswd</p>
+                      <input name="scpass" type="password" pattern='[A-Za-z0-9_!]+{6,}' title='Password accepts A-Z, a-z, 0-9, underscore, exclamation mark and should be of more than 6 characters.' id='in3' required>
+                 </div>
+             </div>
+             <div class='row rot'>
+                <div class='log_link'>
+                        <a href='{% url 'login' %}'>Got Account?</a>
+                </div>
+                <div class='sbtn'>
+                        <button class="btn waves-effect waves-light black blue-text" type='submit'>
+                                SignUp
+                        </button>
+                </div>
+             </div>
+          </form>
+      </div>
+    </div>
+</div> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
