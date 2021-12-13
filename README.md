@@ -36,7 +36,7 @@ Tubeleak is a social(Youtube) site with anoymous login and upload videos with al
 
 * login page
 
-![login](https://user-images.githubusercontent.com/78518826/145786291-181c8eb5-ef6c-4ae9-840a-8c95532f01a9.png)
+![login](https://user-images.githubusercontent.com/78518826/145787549-48669456-3a0c-4f8e-b457-3bf439842e82.png)
 
 * Signup
 
