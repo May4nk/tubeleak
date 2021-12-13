@@ -1,8 +1,8 @@
 # Tubeleak
-Tubeleak is a social(Youtube) site with annoymous login and upload videos with all functionality.
+Tubeleak is a social(Youtube) site with anoymous login and upload videos with all functionality.
 
 ## Introduction
-(***currently in developing phase,non-responsive but works fine***)App for annonymously surfing,uploading and commenting on videos.
+(***currently in developing phase,non-responsive but works fine***)App for anonymously surfing,uploading and commenting on videos.
 
 ## Usage
 
