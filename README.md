@@ -2,7 +2,7 @@
 Tubeleak is a social(Youtube) site with annoymous login and upload videos with all functionality.
 
 ## Introduction
-(***currently in developing phase,non-responsive but works fine***)App for surf annonymously surf,upload and comment on videos.
+(***currently in developing phase,non-responsive but works fine***)App for annonymously surfing,uploading and commenting on videos.
 
 ## Usage
 
@@ -36,20 +36,28 @@ Tubeleak is a social(Youtube) site with annoymous login and upload videos with a
 
 * login page
 
-![login](https://user-images.githubusercontent.com/78518826/145784900-6fd22113-bb70-4d6b-af0b-e9f5f5b290ca.png)
+![login](https://user-images.githubusercontent.com/78518826/145786291-181c8eb5-ef6c-4ae9-840a-8c95532f01a9.png)
+
+* Signup
+
+![signup](https://user-images.githubusercontent.com/78518826/145786353-9c8d6897-b1d3-4e17-a137-f4082f90ced4.png)
 
 * home
 
-![home](https://user-images.githubusercontent.com/78518826/145784820-2782fee2-e8fc-4b3c-8d48-f4ceff857a67.png)
+![home](https://user-images.githubusercontent.com/78518826/145786495-43d1ab9d-b842-4b7e-afca-487d8bc0a382.png)
 
 * Add post
 
-![add](https://user-images.githubusercontent.com/78518826/145784948-edeb85e7-6825-4c41-bcaa-4483597919de.png)
+![add](https://user-images.githubusercontent.com/78518826/145786549-3f7d2a4c-42ba-40d5-b3ee-9740c8b55aeb.png)
 
 * Clip and comment
 
-![clip_comm](https://user-images.githubusercontent.com/78518826/145785090-2052a8ae-1f34-4d5c-baa2-d075d428d2de.png)
+![clip_comm](https://user-images.githubusercontent.com/78518826/145786602-ce31f423-8c8a-4457-8a5a-d8b3a641eecf.png)
 
 * profile
 
-![profile](https://user-images.githubusercontent.com/78518826/145785009-bcaa1912-c714-4adb-86f6-1e6e003fddbe.png)
+![profile](https://user-images.githubusercontent.com/78518826/145786630-3d1880a9-41b3-4707-91ab-9b0dd77f4579.png)
+
+* Trending
+
+![trending](https://user-images.githubusercontent.com/78518826/145786157-3fb83d28-482f-4bf6-9328-16c923ad5742.png)
